@@ -111,12 +111,15 @@ class PandasQReader(QReader):
         qlist = QReader._read_list(self, qtype = qtype)
 
         if self._options.pandas:
+            ps = pandas.Series(data = qlist)
+            '''
             if -abs(qtype) not in [QMONTH, QDATE, QDATETIME, QMINUTE, QSECOND, QTIME, QTIMESTAMP, QTIMESPAN, QSYMBOL]:
                 null = QNULLMAP[-abs(qtype)][1]
                 ps = pandas.Series(data = qlist).replace(null, numpy.NaN)
             else:
                 ps = pandas.Series(data = qlist)
-
+            '''
+            
             ps.meta = MetaData(qtype = qtype)
             return ps
         else:
